@@ -1,0 +1,39 @@
+---
+import "@styles/global.css";
+
+type Props = {
+  title: string;
+  description: string;
+  image?: string;
+};
+
+const {
+  title,
+  description,
+  image = "/assets/codex/og-codex-ambassador.png"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#05070c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <link rel="icon" type="image/png" href="/assets/codex/codex-icon.png" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

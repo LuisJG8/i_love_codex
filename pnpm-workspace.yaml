@@ -1,0 +1,6 @@
+overrides:
+  yaml-language-server: 1.23.0
+
+allowBuilds:
+  esbuild: true
+  sharp: true
