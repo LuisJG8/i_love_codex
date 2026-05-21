@@ -167,7 +167,7 @@ button:focus-visible {
 .timeline-source-box:hover {
   background: #ffffff;
   border-color: #ffffff;
-  color: #000000 !important;
+  color: #000000;
   transform: translateY(-0.125rem);
 }
 
