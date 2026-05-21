@@ -1,60 +1,30 @@
 ---
 import Timeline from "@components/Timeline.astro";
-import EvergreenLinks from "@components/EvergreenLinks.astro";
-import { evergreenLinks, timeline } from "@data/codex";
+import { timeline } from "@data/codex";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-const title = "Codex Wins";
+const title = "Everything that is great about Codex";
 const description =
-  "A fan-made timeline of OpenAI Codex milestones and wins from 2021 through April 23, 2026.";
+  "A fan-made timeline of OpenAI Codex milestones and wins from 2021 through May 14, 2026.";
 ---
 
 <BaseLayout title={title} description={description}>
   <header class="relative z-20 border-b border-white/10 bg-codex-void/75 backdrop-blur">
     <nav class="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-6 lg:px-8" aria-label="Primary">
-      <a class="flex min-w-0 items-center gap-3" href="/" aria-label="Codex Wins home">
+      <a class="flex min-w-0 items-center gap-3" href="/" aria-label="Everything that is great about Codex home">
         <img src="/assets/codex/codex-mark.svg" alt="" class="codex-mark h-8 w-8 shrink-0" width="32" height="32" />
-        <span class="text-sm font-semibold text-white">Codex Wins</span>
+        <span class="text-sm font-semibold text-white">Everything that is great about Codex</span>
       </a>
-      <div class="flex shrink-0 items-center gap-3 text-sm text-slate-300">
-        <a class="hidden transition hover:text-white sm:inline" href="#links">Links</a>
-        <a
-          class="hidden rounded-md border border-codex-line bg-white/[0.05] px-3 py-2 font-medium text-white transition hover:border-codex-cyan/70 sm:inline-flex"
-          href="#timeline"
-        >
-          Timeline
-        </a>
-      </div>
     </nav>
   </header>
 
   <main>
-    <section class="codex-title-strip border-b border-white/10 px-5 py-8 sm:px-6 lg:px-8" aria-labelledby="site-title">
-      <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-5">
-        <h1 id="site-title" class="min-w-0 text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
-          Codex Wins
-        </h1>
-        <img
-          src="/assets/codex/codex-medal-pet.png"
-          alt=""
-          class="codex-title-pet"
-          width="1254"
-          height="1254"
-          loading="eager"
-          aria-hidden="true"
-        />
-      </div>
-    </section>
-
     <Timeline items={timeline} />
-    <div class="hairline"></div>
-    <EvergreenLinks links={evergreenLinks} />
   </main>
 
   <footer class="border-t border-white/10 px-5 py-8 text-sm text-slate-400 sm:px-6 lg:px-8">
     <div class="mx-auto flex w-full max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <p>Codex Wins is a fan-made static archive.</p>
-      <p>Content cutoff: April 23, 2026.</p>
+      <p>Not affiliated with OpenAI</p>
     </div>
   </footer>
 </BaseLayout>

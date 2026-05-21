@@ -11,7 +11,6 @@ export type TimelineItem = {
   details?: string;
   sources: SourceLink[];
   metric?: string;
-  storyTag?: string;
 };
 
 export type EvergreenLink = SourceLink & {
@@ -23,9 +22,17 @@ const sources = {
     label: "OpenAI Codex, 2021",
     url: "https://openai.com/index/openai-codex/"
   },
+  copilotPreview: {
+    label: "GitHub Copilot preview",
+    url: "https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/"
+  },
   introducingCodex: {
     label: "Introducing Codex",
     url: "https://openai.com/index/introducing-codex/"
+  },
+  codexCli: {
+    label: "Codex CLI docs",
+    url: "https://developers.openai.com/codex/cli"
   },
   codexProduct: {
     label: "Codex product page",
@@ -59,13 +66,35 @@ const sources = {
     label: "Codex for almost everything",
     url: "https://openai.com/index/codex-for-almost-everything/"
   },
+  gpt5Codex: {
+    label: "Introducing upgrades to Codex",
+    url: "https://openai.com/index/introducing-upgrades-to-codex/"
+  },
+  gpt53Codex: {
+    label: "Introducing GPT-5.3-Codex",
+    url: "https://openai.com/index/introducing-gpt-5-3-codex/"
+  },
   academy: {
     label: "OpenAI Academy: Codex",
     url: "https://openai.com/academy/codex/"
+  },
+  workAnywhere: {
+    label: "Work with Codex from anywhere",
+    url: "https://openai.com/index/work-with-codex-from-anywhere/"
   }
 } satisfies Record<string, SourceLink>;
 
 export const timeline: TimelineItem[] = [
+  {
+    date: "2021-06-29",
+    category: "Adoption",
+    title: "GitHub Copilot launches powered by Codex",
+    summary:
+      "GitHub launches the Copilot technical preview, built with OpenAI and powered by OpenAI Codex.",
+    details:
+      "This is the first massive Codex adoption story. Before Codex was opened through the API, it was already inside a new developer workflow: suggesting whole lines and functions directly in the editor while drawing context from the code being written.",
+    sources: [sources.copilotPreview, sources.codex2021]
+  },
   {
     date: "2021-08-10",
     category: "Origin",
@@ -74,17 +103,6 @@ export const timeline: TimelineItem[] = [
       "OpenAI releases the improved Codex system, built to translate natural language into code and invite developers to build on it through the API.",
     details:
       "This is the origin point for the archive: Codex is framed as a system that can turn plain-language intent into working code across common programming languages. The beta also makes the core Codex promise explicit: developers should be able to describe a task, inspect the result, and keep control of the implementation.",
-    sources: [sources.codex2021],
-    storyTag: "The spark"
-  },
-  {
-    date: "2023-03-01",
-    category: "Transition",
-    title: "Original Codex models are deprecated",
-    summary:
-      "OpenAI marks the first Codex model era as retired, setting up the later shift from code model to full coding agent.",
-    details:
-      "The early completion-style Codex models sunset before the product name returns with a different shape. In hindsight, this transition matters because the later Codex is not just a code model, but a tool-using agent that can read repositories, edit files, run commands, and hand work back for review.",
     sources: [sources.codex2021]
   },
   {
@@ -95,8 +113,7 @@ export const timeline: TimelineItem[] = [
       "Codex returns as a local terminal coding agent in the openai/codex repository, bringing agentic edits and command execution into developer machines.",
     details:
       "The CLI makes Codex feel native to the working developer loop: open a repository, ask for a change, inspect the diff, and let commands run locally when approved. Open-sourcing the project gives the community a concrete place to track releases, file issues, and understand how the agent fits into terminal workflows.",
-    sources: [sources.codex2021, sources.github],
-    storyTag: "Terminal native"
+    sources: [sources.codexCli, sources.github]
   },
   {
     date: "2025-05-16",
@@ -105,46 +122,13 @@ export const timeline: TimelineItem[] = [
     summary:
       "OpenAI introduces a cloud-based software engineering agent powered by codex-1, able to work on parallel tasks in isolated repository environments.",
     details:
-      "The research preview moves Codex beyond one local session. Developers can assign several jobs at once, let each run in a separate environment, and come back to proposed changes, logs, and test results. That parallelism becomes a defining Codex pattern rather than a novelty.",
-    sources: [sources.introducingCodex],
-    storyTag: "Agent era"
-  },
-  {
-    date: "2025-05-16",
-    category: "Stories",
-    title: "Early testers show real production workflows",
-    summary:
-      "OpenAI highlights real usage across OpenAI, Cisco, Temporal, Superhuman, and Kodiak, from refactoring and testing to product-manager code changes.",
-    details:
-      "The launch story is stronger because it includes work that sounds like normal engineering, not only demos: writing tests, fixing integrations, understanding unfamiliar code, refactoring, debugging, and preparing reviewable changes. The customer mix also shows Codex being evaluated in enterprise, infrastructure, productivity, and autonomous-vehicle codebases.",
-    sources: [sources.introducingCodex],
-    storyTag: "External proof"
-  },
-  {
-    date: "2025-05-19",
-    category: "Mobile",
-    title: "Codex reaches the ChatGPT iOS app",
-    summary:
-      "The changelog adds mobile task starts, diff review, and PR pushes for developers away from a desk.",
-    details:
-      "This update turns Codex into something developers can supervise from a phone. Starting a task, checking the diff, and pushing a pull request from iOS makes the cloud-agent model more credible because the heavy work happens remotely while the human still reviews the result.",
-    sources: [sources.changelog]
-  },
-  {
-    date: "2025-05-22",
-    category: "Reliability",
-    title: "Environment setup and latency get sharper",
-    summary:
-      "OpenAI reports reduced GitHub disconnects, faster PR creation, lower tool-call latency, and better task completion latency.",
-    details:
-      "Reliability improvements matter because coding agents spend much of their time on setup, repository sync, and command execution. This changelog entry tightens the unglamorous parts of the loop: fewer broken GitHub connections, faster PR creation, and lower latency while the agent works through a task.",
-    sources: [sources.changelog],
-    metric: "90% fewer GitHub disconnects"
+      "The research preview moves Codex beyond one local session. Developers can assign several jobs at once, let each run in a separate environment, and come back to proposed changes, logs, and test results. OpenAI also highlighted real production use across OpenAI, Cisco, Temporal, Superhuman, and Kodiak, making the launch feel like normal engineering work rather than a demo.",
+    sources: [sources.introducingCodex]
   },
   {
     date: "2025-06-03",
     category: "Access",
-    title: "Codex expands to ChatGPT Plus and gains internet access controls",
+    title: "Codex expands to Plus and controlled internet access",
     summary:
       "Codex becomes available to Plus users and adds opt-in internet access during task execution for dependency installs, package upgrades, and tests.",
     details:
@@ -152,23 +136,13 @@ export const timeline: TimelineItem[] = [
     sources: [sources.introducingCodex, sources.changelog]
   },
   {
-    date: "2025-06-13",
-    category: "Workflow",
-    title: "Best of N makes parallel exploration a product pattern",
-    summary:
-      "Codex gains the ability to generate multiple responses for one task, letting developers compare approaches before choosing a direction.",
-    details:
-      "Instead of betting on the first attempt, developers can ask Codex to explore several implementation paths and compare tradeoffs. That is especially useful for ambiguous refactors, design-sensitive frontend work, or bug fixes where one passing solution may still not be the best one.",
-    sources: [sources.changelog]
-  },
-  {
     date: "2025-08-21",
     category: "Speed",
-    title: "Image inputs, container caching, and automatic setup land",
+    title: "Image inputs, caching, and automatic setup make Codex practical",
     summary:
       "Codex adds image prompts for frontend work, cached containers, and automatic environment setup across common package managers.",
     details:
-      "This is one of the most practical workflow upgrades in the archive. Image inputs make visual UI requests easier to express, automatic setup reduces the blank-project tax, and cached containers cut the median cached start time from 48 seconds to 5 seconds in OpenAI's reported numbers.",
+      "This is one of the most practical workflow upgrades in the archive. Image inputs make visual UI requests easier to express, automatic setup reduces the blank-project tax, and cached containers cut the median cached start time from 48 seconds to 5 seconds. OpenAI also reported a 40% reduction in test failures for new environments.",
     sources: [sources.changelog],
     metric: "48s to 5s median cached starts"
   },
@@ -190,7 +164,7 @@ export const timeline: TimelineItem[] = [
       "OpenAI introduces GPT-5-Codex, optimized for Codex workflows and powering the cloud agent plus GitHub Code Review.",
     details:
       "The model line becomes explicitly tuned for long-running coding work rather than general chat alone. Codex can lean on a model built for repository context, tool calls, edits, reviews, and the kind of multi-step debugging that makes agentic coding hard.",
-    sources: [sources.changelog]
+    sources: [sources.gpt5Codex, sources.changelog]
   },
   {
     date: "2025-09-23",
@@ -210,8 +184,7 @@ export const timeline: TimelineItem[] = [
       "Codex becomes generally available with @Codex in Slack, a TypeScript SDK, a GitHub Action, and new admin controls.",
     details:
       "General availability marks Codex as something teams can adopt with fewer preview caveats. The launch also widens the control plane: Slack mentions, SDK hooks, GitHub Actions, and admin settings make Codex easier to fit into team workflows instead of treating it as a standalone assistant.",
-    sources: [sources.changelog],
-    storyTag: "GA"
+    sources: [sources.changelog]
   },
   {
     date: "2025-10-22",
@@ -221,37 +194,6 @@ export const timeline: TimelineItem[] = [
       "GitHub issue and pull request mentions become a way to ask Codex questions, request follow-ups, or assign changes from existing workflows.",
     details:
       "This is a workflow win because it lets Codex live where engineering discussion already happens. A developer can move from review feedback or an issue thread directly into an agent task without translating the context into a separate prompt from scratch.",
-    sources: [sources.changelog]
-  },
-  {
-    date: "2025-11-07",
-    category: "Model",
-    title: "GPT-5-Codex-Mini adds longer-running usage",
-    summary:
-      "OpenAI adds a smaller, cost-effective Codex model and automatic switching suggestions near usage limits.",
-    details:
-      "The Mini variant gives users a way to keep working when they need more volume or lower-cost turns. OpenAI positions it as especially useful near usage limits, with roughly four times more usage compared with the larger default in the relevant plan context.",
-    sources: [sources.changelog],
-    metric: "about 4x more usage"
-  },
-  {
-    date: "2025-11-13",
-    category: "Model",
-    title: "GPT-5.1-Codex and Mini join the picker",
-    summary:
-      "Codex adds GPT-5.1-Codex options tuned for long-running agentic coding tasks in the CLI and IDE extension.",
-    details:
-      "Model choice becomes part of the Codex workflow. Developers can select newer Codex-tuned options from the CLI or IDE extension, choosing between stronger reasoning and lighter variants depending on task complexity and available usage.",
-    sources: [sources.changelog]
-  },
-  {
-    date: "2025-11-18",
-    category: "Model",
-    title: "GPT-5.1-Codex-Max and xhigh reasoning arrive",
-    summary:
-      "OpenAI releases a new frontier agentic coding model and adds Extra High reasoning for non-latency-sensitive tasks.",
-    details:
-      "The Max model and xhigh reasoning setting target the harder end of the coding-agent spectrum: migrations, deep debugging, cross-file refactors, and tasks where waiting longer is acceptable if the reasoning is better. It also shows Codex becoming a family of modes, not a single fixed assistant.",
     sources: [sources.changelog]
   },
   {
@@ -265,16 +207,6 @@ export const timeline: TimelineItem[] = [
     sources: [sources.changelog]
   },
   {
-    date: "2025-12-18",
-    category: "Model",
-    title: "GPT-5.2-Codex becomes the default for ChatGPT sign-in",
-    summary:
-      "The CLI and IDE extension default to GPT-5.2-Codex for ChatGPT-authenticated users, emphasizing refactors, migrations, Windows work, and cybersecurity.",
-    details:
-      "The default model update matters because most users do not constantly tune settings. By moving ChatGPT-authenticated CLI and IDE users to GPT-5.2-Codex, OpenAI pushes a stronger baseline for larger code transformations, platform-specific work, and security-sensitive tasks.",
-    sources: [sources.changelog]
-  },
-  {
     date: "2025-12-19",
     category: "Skills",
     title: "Agent skills give Codex reusable workflows",
@@ -285,16 +217,6 @@ export const timeline: TimelineItem[] = [
     sources: [sources.changelog]
   },
   {
-    date: "2026-01-14",
-    category: "API",
-    title: "GPT-5.2-Codex reaches API-key workflows",
-    summary:
-      "OpenAI makes GPT-5.2-Codex available in the API and for Codex users signed in with an API key.",
-    details:
-      "This closes the gap between ChatGPT-authenticated Codex use and API-key-based workflows. Teams that manage access through API projects can use the newer Codex model in local tooling and custom automation without switching authentication models.",
-    sources: [sources.changelog]
-  },
-  {
     date: "2026-01-23",
     category: "Team",
     title: "Team Config standardizes Codex across repositories",
@@ -302,16 +224,6 @@ export const timeline: TimelineItem[] = [
       "Shared config.toml defaults, rules, and skills can live in project, user, or system layers, giving teams common behavior across machines.",
     details:
       "Team Config makes Codex behavior more predictable in real organizations. Rules can live close to a repository, merge with user and system defaults, and define the conventions that matter for a codebase before an agent starts editing.",
-    sources: [sources.changelog]
-  },
-  {
-    date: "2026-01-28",
-    category: "Search",
-    title: "Web search is enabled by default for local tasks",
-    summary:
-      "Codex CLI and the IDE extension gain cached web search by default, with live and disabled modes configurable by users.",
-    details:
-      "Local agents often need current docs, release notes, or examples to avoid guessing. Cached web search gives Codex a more useful research path while preserving configuration options for teams that need live search, restricted search, or no search at all.",
     sources: [sources.changelog]
   },
   {
@@ -328,12 +240,23 @@ export const timeline: TimelineItem[] = [
   {
     date: "2026-02-05",
     category: "Model",
-    title: "Codex app adds GPT-5.3-Codex support and steering",
+    title: "GPT-5.3-Codex adds frontier capability and live steering",
     summary:
-      "The app adds GPT-5.3-Codex, mid-turn steering, broad file attachment support, and more stable desktop behavior.",
+      "OpenAI releases GPT-5.3-Codex with stronger long-running capability, faster performance, and support for steering while the agent works.",
     details:
-      "Mid-turn steering is the important interaction change: users can redirect an agent while work is underway instead of waiting for an imperfect final result. Combined with broad attachments and model updates, the app becomes better suited for messy, real project context.",
-    sources: [sources.changelog]
+      "This is a major capability jump, not just a model-picker update. OpenAI positions GPT-5.3-Codex as expanding Codex across professional computer work, and the live steering behavior changes the interaction model: users can redirect the agent mid-turn without losing context.",
+    sources: [sources.gpt53Codex, sources.changelog],
+    metric: "25% faster"
+  },
+  {
+    date: "2026-03-04",
+    category: "App",
+    title: "The Codex app reaches Windows",
+    summary:
+      "The desktop app becomes available on Windows with native PowerShell support, a native Windows sandbox, worktrees, skills, and automations.",
+    details:
+      "Windows support expands Codex from a Mac-first desktop workflow into the larger developer ecosystem. The important part is that it is not just a wrapper: OpenAI describes native PowerShell execution and a native Windows sandbox, so users can keep bounded permissions without moving into WSL or a virtual machine.",
+    sources: [sources.app, sources.changelog]
   },
   {
     date: "2026-03-25",
@@ -357,15 +280,25 @@ export const timeline: TimelineItem[] = [
     metric: "3M+ weekly developers"
   },
   {
-    date: "2026-04-23",
-    category: "Cutoff",
-    title: "GPT-5.5 and Codex app updates close this archive",
+    date: "2026-05-07",
+    category: "Browser",
+    title: "Codex for Chrome brings agents into browser tabs",
     summary:
-      "The last included update adds GPT-5.5 availability, in-app browser operation for local development pages, automatic approval reviews, and CLI 0.124.0.",
+      "The Chrome extension lets Codex work with apps and websites across background tabs while users control which sites it can access.",
     details:
-      "This is the archive cutoff, not the end of Codex. By April 23, 2026, the changelog shows Codex adding newer model access, browser operation for local development verification, automatic approval-review behavior, and another CLI release, which makes the timeline feel like a product still accelerating.",
-    sources: [sources.changelog],
-    storyTag: "Archive cutoff"
+      "This is a key beyond-code milestone because it gives Codex a direct path into browser-based tools without taking over the user's active browser session. It builds on the app's in-browser work and makes web workflows feel like part of the same agent surface.",
+    sources: [sources.changelog]
+  },
+  {
+    date: "2026-05-14",
+    category: "Mobile",
+    title: "Codex comes to ChatGPT mobile",
+    summary:
+      "Codex rolls out in preview on iOS and Android across all plans, letting users steer active work from their phones.",
+    details:
+      "This is the strongest mobile milestone: the ChatGPT mobile app can load live state from connected machines, including threads, approvals, plugins, screenshots, terminal output, diffs, and tests. The same announcement says more than 4 million people use Codex weekly, and adds Remote SSH general availability, hooks, access tokens, and HIPAA-compliant local use for eligible Enterprise workspaces.",
+    sources: [sources.workAnywhere],
+    metric: "4M+ weekly users"
   }
 ];
 

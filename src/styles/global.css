@@ -86,22 +86,7 @@ button:focus-visible {
   filter: brightness(0) invert(1);
 }
 
-.codex-title-strip {
-  background:
-    linear-gradient(116deg, rgba(5, 7, 12, 0.98) 0%, rgba(22, 14, 55, 0.96) 42%, rgba(83, 58, 214, 0.72) 100%),
-    linear-gradient(180deg, #0b0820 0%, #271058 100%);
-}
-
-.codex-title-pet {
-  filter: drop-shadow(0 22px 32px rgba(0, 0, 0, 0.42)) drop-shadow(0 0 22px rgba(84, 166, 255, 0.3));
-  flex: 0 0 auto;
-  height: auto;
-  image-rendering: auto;
-  width: clamp(7.25rem, 17vw, 12.5rem);
-}
-
 .timeline-list {
-  counter-reset: timeline;
   display: grid;
   gap: 0;
   max-width: 100%;
@@ -110,7 +95,7 @@ button:focus-visible {
 }
 
 .timeline-list::before {
-  background: linear-gradient(180deg, transparent, rgba(182, 242, 255, 0.78) 5rem, rgba(138, 107, 255, 0.62), transparent);
+  background: #ffffff;
   bottom: 0;
   content: "";
   left: 1rem;
@@ -120,7 +105,6 @@ button:focus-visible {
 }
 
 .timeline-item {
-  counter-increment: timeline;
   display: grid;
   grid-template-columns: 2.25rem minmax(0, 1fr);
   max-width: 100%;
@@ -172,35 +156,44 @@ button:focus-visible {
   width: 1.25rem;
 }
 
-.timeline-count {
-  align-items: center;
-  background: rgba(182, 242, 255, 0.1);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--cyan);
-  display: inline-flex;
-  font-size: 0.72rem;
-  font-weight: 700;
-  height: 1.55rem;
-  justify-content: center;
-  line-height: 1;
-  min-width: 1.55rem;
+.timeline-source-box {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
 }
 
-.timeline-count::before {
-  content: counter(timeline);
+.timeline-source-box:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  transform: translateY(-0.125rem);
 }
 
 .timeline-visual {
   align-items: center;
+  aspect-ratio: var(--timeline-visual-ratio);
   display: flex;
   grid-column: 2;
   justify-content: center;
   margin: 0;
   margin-top: 0.9rem;
   min-height: 8.5rem;
+  opacity: 0;
   position: relative;
+  transform: translateY(1.35rem) scale(0.98);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
   width: min(100%, 19rem);
+  will-change: opacity, transform;
+}
+
+.timeline-visual.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  will-change: auto;
 }
 
 .timeline-visual-image {
@@ -210,6 +203,7 @@ button:focus-visible {
     drop-shadow(0 0 22px rgba(84, 166, 255, 0.14));
   height: auto;
   max-height: 100%;
+  max-width: 100%;
   object-fit: contain;
   opacity: 0.96;
   width: 100%;
@@ -281,5 +275,10 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .timeline-visual {
+    opacity: 1;
+    transform: none;
   }
 }

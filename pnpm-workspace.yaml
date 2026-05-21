@@ -1,4 +1,5 @@
 overrides:
+  devalue: 5.8.1
   yaml-language-server: 1.23.0
 
 allowBuilds:

@@ -6,8 +6,10 @@ type Props = {
 };
 
 type TimelineVisual = {
+  height: number;
   label: string;
   src: string;
+  width: number;
 };
 
 const { items } = Astro.props;
@@ -20,121 +22,131 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 const timelineVisuals: Record<string, TimelineVisual> = {
-  "2021-08-10:OpenAI Codex enters API private beta": {
-    label: "API key card, code document, and launch spark illustration",
-    src: "/assets/timeline/api-private-beta.webp"
+  "2021-06-29:GitHub Copilot launches powered by Codex": {
+    height: 716,
+    label: "Checklist, workflow stack, and developer tool illustration",
+    src: "/assets/timeline/early-testers-workflows.webp",
+    width: 720
   },
-  "2023-03-01:Original Codex models are deprecated": {
-    label: "Archive box, retired chip, and migration arrow illustration",
-    src: "/assets/timeline/original-models-deprecated.webp"
+  "2021-08-10:OpenAI Codex enters API private beta": {
+    height: 694,
+    label: "API key card, code document, and launch spark illustration",
+    src: "/assets/timeline/api-private-beta.webp",
+    width: 720
   },
   "2025-04-16:Codex CLI launches as an open-source local agent": {
+    height: 706,
     label: "Terminal, repository branch, and open-source crate illustration",
-    src: "/assets/timeline/cli-open-source-agent.webp"
+    src: "/assets/timeline/cli-open-source-agent.webp",
+    width: 720
   },
   "2025-05-16:Cloud Codex research preview arrives in ChatGPT": {
+    height: 703,
     label: "Cloud server, parallel tasks, and repository cubes illustration",
-    src: "/assets/timeline/cloud-research-preview.webp"
+    src: "/assets/timeline/cloud-research-preview.webp",
+    width: 720
   },
-  "2025-05-16:Early testers show real production workflows": {
-    label: "Checklist, toolkit, and app tiles illustration",
-    src: "/assets/timeline/early-testers-workflows.webp"
-  },
-  "2025-05-19:Codex reaches the ChatGPT iOS app": {
-    label: "Phone, diff review, and pull request arrow illustration",
-    src: "/assets/timeline/ios-app.webp"
-  },
-  "2025-05-22:Environment setup and latency get sharper": {
-    label: "Speed gauge, container cube, and reconnecting cable illustration",
-    src: "/assets/timeline/environment-latency.webp"
-  },
-  "2025-06-03:Codex expands to ChatGPT Plus and gains internet access controls": {
+  "2025-06-03:Codex expands to Plus and controlled internet access": {
+    height: 664,
     label: "Globe, permission toggle, and shield illustration",
-    src: "/assets/timeline/plus-internet-controls.webp"
+    src: "/assets/timeline/plus-internet-controls.webp",
+    width: 720
   },
-  "2025-06-13:Best of N makes parallel exploration a product pattern": {
-    label: "Two answer cards and comparison scale illustration",
-    src: "/assets/timeline/best-of-n.webp"
-  },
-  "2025-08-21:Image inputs, container caching, and automatic setup land": {
+  "2025-08-21:Image inputs, caching, and automatic setup make Codex practical": {
+    height: 660,
     label: "Image prompt card, container cube, and cache stack illustration",
-    src: "/assets/timeline/image-inputs-container-caching.webp"
+    src: "/assets/timeline/image-inputs-container-caching.webp",
+    width: 720
   },
   "2025-08-27:IDE extension, ChatGPT sign-in, handoff, and Code Reviews arrive": {
+    height: 643,
     label: "Code editor, review badge, and sign-in key illustration",
-    src: "/assets/timeline/ide-extension-code-review.webp"
+    src: "/assets/timeline/ide-extension-code-review.webp",
+    width: 720
   },
   "2025-09-15:GPT-5-Codex launches for agentic coding": {
+    height: 694,
     label: "Model chip, code token, and rocket illustration",
-    src: "/assets/timeline/gpt-5-codex-launch.webp"
+    src: "/assets/timeline/gpt-5-codex-launch.webp",
+    width: 720
   },
   "2025-09-23:GPT-5-Codex becomes available in the Responses API": {
+    height: 717,
     label: "API socket, model chip, and globe ring illustration",
-    src: "/assets/timeline/responses-api.webp"
+    src: "/assets/timeline/responses-api.webp",
+    width: 720
   },
   "2025-10-06:Codex reaches general availability": {
+    height: 375,
     label: "Launch rocket, release ticket, and admin sliders illustration",
-    src: "/assets/timeline/general-availability.webp"
+    src: "/assets/timeline/general-availability.webp",
+    width: 720
   },
   "2025-10-22:Developers can tag @Codex on GitHub issues and PRs": {
+    height: 278,
     label: "Issue ticket, mention bubble, and pull request branch illustration",
-    src: "/assets/timeline/github-mentions.webp"
-  },
-  "2025-11-07:GPT-5-Codex-Mini adds longer-running usage": {
-    label: "Small model chip, extended battery, and gauge illustration",
-    src: "/assets/timeline/codex-mini-longer-usage.webp"
-  },
-  "2025-11-13:GPT-5.1-Codex and Mini join the picker": {
-    label: "Model picker dial, two chips, and terminal sliders illustration",
-    src: "/assets/timeline/gpt-5-1-picker.webp"
-  },
-  "2025-11-18:GPT-5.1-Codex-Max and xhigh reasoning arrive": {
-    label: "Large chip, reasoning blocks, and reasoning gauge illustration",
-    src: "/assets/timeline/codex-max-xhigh.webp"
+    src: "/assets/timeline/github-mentions.webp",
+    width: 720
   },
   "2025-12-04:Codex for Linear turns issues into cloud tasks": {
+    height: 276,
     label: "Issue ticket, progress link, and cloud task bubble illustration",
-    src: "/assets/timeline/linear-cloud-tasks.webp"
-  },
-  "2025-12-18:GPT-5.2-Codex becomes the default for ChatGPT sign-in": {
-    label: "Default toggle, upgraded chip, and terminal key illustration",
-    src: "/assets/timeline/gpt-5-2-default.webp"
+    src: "/assets/timeline/linear-cloud-tasks.webp",
+    width: 720
   },
   "2025-12-19:Agent skills give Codex reusable workflows": {
+    height: 283,
     label: "Recipe cards, toolkit, and puzzle-piece badge illustration",
-    src: "/assets/timeline/agent-skills.webp"
-  },
-  "2026-01-14:GPT-5.2-Codex reaches API-key workflows": {
-    label: "API key card, terminal, and connected model chip illustration",
-    src: "/assets/timeline/api-key-workflows.webp"
+    src: "/assets/timeline/agent-skills.webp",
+    width: 720
   },
   "2026-01-23:Team Config standardizes Codex across repositories": {
+    height: 339,
     label: "Config file, shared repository folder, and gear illustration",
-    src: "/assets/timeline/team-config.webp"
-  },
-  "2026-01-28:Web search is enabled by default for local tasks": {
-    label: "Magnifying glass, globe, and browser card illustration",
-    src: "/assets/timeline/web-search-default.webp"
+    src: "/assets/timeline/team-config.webp",
+    width: 720
   },
   "2026-02-02:The Codex app launches on macOS": {
+    height: 316,
     label: "Desktop command center, agent cards, and worktree branch illustration",
-    src: "/assets/timeline/macos-app.webp"
+    src: "/assets/timeline/macos-app.webp",
+    width: 720
   },
-  "2026-02-05:Codex app adds GPT-5.3-Codex support and steering": {
+  "2026-02-05:GPT-5.3-Codex adds frontier capability and live steering": {
+    height: 633,
     label: "Steering wheel, model chip, and attachment card illustration",
-    src: "/assets/timeline/steering-attachments.webp"
+    src: "/assets/timeline/steering-attachments.webp",
+    width: 720
+  },
+  "2026-03-04:The Codex app reaches Windows": {
+    height: 316,
+    label: "Desktop command center, agent cards, and worktree branch illustration",
+    src: "/assets/timeline/macos-app.webp",
+    width: 720
   },
   "2026-03-25:Plugins package skills, apps, and MCP servers": {
+    height: 327,
     label: "Puzzle piece, skill card, and connector node illustration",
-    src: "/assets/timeline/plugins-package.webp"
+    src: "/assets/timeline/plugins-package.webp",
+    width: 720
   },
   "2026-04-16:Codex expands toward almost everything": {
+    height: 303,
     label: "Command window, plugin puzzle, and task checklist illustration",
-    src: "/assets/timeline/almost-everything.webp"
+    src: "/assets/timeline/almost-everything.webp",
+    width: 720
   },
-  "2026-04-23:GPT-5.5 and Codex app updates close this archive": {
-    label: "Archive box, model chip, and upgrade arrow illustration",
-    src: "/assets/timeline/gpt-5-5-archive.webp"
+  "2026-05-07:Codex for Chrome brings agents into browser tabs": {
+    height: 290,
+    label: "Magnifying glass, globe, and browser card illustration",
+    src: "/assets/timeline/web-search-default.webp",
+    width: 720
+  },
+  "2026-05-14:Codex comes to ChatGPT mobile": {
+    height: 635,
+    label: "Phone, diff review, and pull request arrow illustration",
+    src: "/assets/timeline/ios-app.webp",
+    width: 720
   }
 };
 
@@ -154,7 +166,7 @@ function getTimelineVisual(item: TimelineItem): TimelineVisual | undefined {
       <p class="text-xs font-semibold uppercase tracking-[0.18em] text-codex-cyan">Archive</p>
       <h2 class="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Milestones and wins</h2>
       <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
-        A newest-first timeline of Codex launches, integrations, model upgrades, and workflow improvements through April 23, 2026.
+        A newest-first timeline of Codex launches, adoption milestones, integrations, model upgrades, and workflow improvements through May 14, 2026.
       </p>
     </div>
 
@@ -181,22 +193,13 @@ function getTimelineVisual(item: TimelineItem): TimelineVisual | undefined {
 
           <article class="timeline-card surface rounded-lg p-4 sm:p-5">
             <div class="mb-4 flex flex-wrap items-center gap-2">
-              <span class="timeline-count" aria-hidden="true"></span>
               <time class="text-sm font-semibold text-codex-cyan" datetime={item.date}>
                 {formatDate(item.date)}
               </time>
-              <span class="rounded bg-white/[0.07] px-2 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-slate-300">
-                {item.category}
-              </span>
             </div>
 
             <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <h3 class="text-lg font-semibold leading-snug text-white sm:text-xl">{item.title}</h3>
-              {item.storyTag && (
-                <span class="w-fit shrink-0 rounded border border-codex-line bg-codex-cyan/10 px-2 py-1 text-xs font-medium text-codex-cyan">
-                  {item.storyTag}
-                </span>
-              )}
             </div>
 
             <p class="mt-3 text-sm font-medium leading-6 text-slate-200">{item.summary}</p>
@@ -206,13 +209,13 @@ function getTimelineVisual(item: TimelineItem): TimelineVisual | undefined {
 
             <div class="mt-4 flex flex-wrap items-center gap-2">
               {item.metric && (
-                <span class="rounded border border-codex-line bg-codex-blue/10 px-2 py-1 text-xs font-semibold text-white">
+                <span class="timeline-source-box rounded border border-codex-line bg-codex-blue/10 px-3 py-1.5 text-xs font-semibold text-white">
                   {item.metric}
                 </span>
               )}
               {item.sources.map((source) => (
                 <a
-                  class="rounded border border-codex-line bg-white/[0.04] px-2 py-1 text-xs font-medium text-slate-200 transition hover:border-codex-cyan/80 hover:text-white"
+                  class="timeline-source-box rounded border border-codex-line bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-200"
                   href={source.url}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -224,11 +227,17 @@ function getTimelineVisual(item: TimelineItem): TimelineVisual | undefined {
           </article>
 
           {visual && (
-            <figure class="timeline-visual">
+            <figure
+              class="timeline-visual"
+              data-reveal-visual
+              style={`--timeline-visual-ratio: ${visual.width} / ${visual.height};`}
+            >
               <img
                 class="timeline-visual-image"
                 src={visual.src}
                 alt={visual.label}
+                width={visual.width}
+                height={visual.height}
                 loading="lazy"
                 decoding="async"
               />
@@ -251,28 +260,73 @@ function getTimelineVisual(item: TimelineItem): TimelineVisual | undefined {
 </section>
 
 <script>
-  const list = document.querySelector<HTMLOListElement>("#timeline-list");
-  const toggle = document.querySelector<HTMLButtonElement>("[data-sort-toggle]");
-  const label = document.querySelector<HTMLElement>("[data-sort-label]");
+  const hydrateTimeline = () => {
+    const section = document.querySelector<HTMLElement>("#timeline");
+    const list = section?.querySelector<HTMLOListElement>("#timeline-list") ?? null;
+    const toggle = section?.querySelector<HTMLButtonElement>("[data-sort-toggle]") ?? null;
+    const label = section?.querySelector<HTMLElement>("[data-sort-label]") ?? null;
 
-  toggle?.addEventListener("click", () => {
-    if (!list || !label) {
+    if (!section || !list || !toggle || !label || section.dataset.timelineHydrated === "true") {
       return;
     }
 
-    const nextOrder = list.dataset.order === "desc" ? "asc" : "desc";
-    const entries = Array.from(list.querySelectorAll<HTMLElement>("[data-date]"));
+    section.dataset.timelineHydrated = "true";
 
-    entries
-      .sort((a, b) => {
-        const left = a.dataset.date ?? "";
-        const right = b.dataset.date ?? "";
-        return nextOrder === "asc" ? left.localeCompare(right) : right.localeCompare(left);
-      })
-      .forEach((entry) => list.appendChild(entry));
+    const onSortClick = () => {
+      const nextOrder = list.dataset.order === "desc" ? "asc" : "desc";
+      const entries = Array.from(list.querySelectorAll<HTMLElement>("[data-date]"));
 
-    list.dataset.order = nextOrder;
-    toggle.setAttribute("aria-pressed", String(nextOrder === "asc"));
-    label.textContent = nextOrder === "asc" ? "Oldest first" : "Newest first";
-  });
+      entries
+        .sort((a, b) => {
+          const left = a.dataset.date ?? "";
+          const right = b.dataset.date ?? "";
+          return nextOrder === "asc" ? left.localeCompare(right) : right.localeCompare(left);
+        })
+        .forEach((entry) => list.appendChild(entry));
+
+      list.dataset.order = nextOrder;
+      toggle.setAttribute("aria-pressed", String(nextOrder === "asc"));
+      label.textContent = nextOrder === "asc" ? "Oldest first" : "Newest first";
+    };
+
+    toggle.addEventListener("click", onSortClick);
+
+    const visualEntries = Array.from(section.querySelectorAll<HTMLElement>("[data-reveal-visual]"));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const showVisuals = (entries: HTMLElement[]) => {
+      entries.forEach((entry) => entry.classList.add("is-visible"));
+    };
+
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      showVisuals(visualEntries);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.18
+      }
+    );
+
+    visualEntries.forEach((entry) => observer.observe(entry));
+  };
+
+  document.addEventListener("astro:page-load", hydrateTimeline);
+  if (document.readyState !== "loading") {
+    hydrateTimeline();
+  } else {
+    document.addEventListener("DOMContentLoaded", hydrateTimeline, { once: true });
+  }
 </script>
