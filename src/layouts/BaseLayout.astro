@@ -12,6 +12,7 @@ const {
   description,
   image = "/assets/codex/og-codex-ambassador.png"
 } = Astro.props;
+const socialImage = new URL(image, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -26,11 +27,11 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={socialImage} />
     <link rel="icon" type="image/png" href="/assets/codex/codex-icon.png" />
   </head>
   <body>
